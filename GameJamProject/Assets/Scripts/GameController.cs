@@ -10,19 +10,23 @@ public class GameController : MonoBehaviour
     [SerializeField] Transform startUI;
     [SerializeField] Transform scoreUI;
     [SerializeField] Transform gameUI;
+
+    //Audio
+    [SerializeField] Transform audio;
+
     [SerializeField] InputField nameField;
 
     //Player
     [SerializeField] Transform player;
 
     private GameUIController gameUIController;
-    private int inputIndex = -1;
+    private AudioController audioController;
 
-    private bool checkingButtonPressed = false;
     private void Awake()
     {
         Time.timeScale = 0;
         gameUIController = gameUI.GetComponent<GameUIController>();
+        audioController = audio.GetComponent<AudioController>();
     }
     void Start()
     {
@@ -63,31 +67,29 @@ public class GameController : MonoBehaviour
             Debug.Log("Player right hit");
             playRightHit();
             addPlayerPoints();
-
-            checkingButtonPressed = false;
         }
         else
         {
             Debug.Log("Player wrong hit");
             playWrongHit();
-
-            checkingButtonPressed = false;
         }
     }
 
     private void addPlayerPoints()
     {
-
+       
     }
 
     private void playRightHit()
     {
-
+        gameUIController.setArrowColor(ArrowMode.ArrowState.RightHit);
+        audioController.Play("RightHit");
     }
 
     private void playWrongHit()
     {
-
+        gameUIController.setArrowColor(ArrowMode.ArrowState.WrongHit);
+        audioController.Play("WrongHit");
     }
 
     public void PlayGame()

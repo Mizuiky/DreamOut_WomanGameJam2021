@@ -13,7 +13,10 @@ public class GameUIController : MonoBehaviour
     }
 
     [SerializeField] GameObject [] arrows;
-    [SerializeField] Color arrowHighlight;
+
+    [SerializeField] Color sortedArrowHighlight;
+    [SerializeField] Color wrongArrowHighlight;
+    [SerializeField] Color rightArrow;
     [SerializeField] Color normalArrow;
 
     [HideInInspector]
@@ -44,7 +47,7 @@ public class GameUIController : MonoBehaviour
             
             sortArrow();
 
-            arrows[sortedArrow].gameObject.GetComponent<Image>().color = arrowHighlight;
+            setArrowColor(ArrowMode.ArrowState.Sorted);
 
             //Debug.Log("Before the delay ");
 
@@ -52,7 +55,7 @@ public class GameUIController : MonoBehaviour
 
             //Debug.Log("Done the delay ");
 
-            arrows[sortedArrow].gameObject.GetComponent<Image>().color = normalArrow;
+            setArrowColor(ArrowMode.ArrowState.Normal);
         }     
     }
 
@@ -79,4 +82,23 @@ public class GameUIController : MonoBehaviour
                 break;
         }
     }  
+
+    public void setArrowColor(ArrowMode.ArrowState arrowState)
+    {
+        switch(arrowState)
+        {
+            case ArrowMode.ArrowState.Normal:
+                arrows[sortedArrow].gameObject.GetComponent<Image>().color = normalArrow;
+                break;
+            case ArrowMode.ArrowState.Sorted:
+                arrows[sortedArrow].gameObject.GetComponent<Image>().color = sortedArrowHighlight;
+                break;
+            case ArrowMode.ArrowState.RightHit:
+                arrows[sortedArrow].gameObject.GetComponent<Image>().color = rightArrow;
+                break;
+            case ArrowMode.ArrowState.WrongHit:
+                arrows[sortedArrow].gameObject.GetComponent<Image>().color = wrongArrowHighlight;
+                break;
+        }
+    }
 }
