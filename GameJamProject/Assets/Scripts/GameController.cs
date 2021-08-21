@@ -9,26 +9,36 @@ public class GameController : MonoBehaviour
     public Transform startUI;
     public Transform scoreUI;
 
-    [SerializeField] bool isOver;
+    [SerializeField] InputField nameField;
+    [SerializeField] string playerName;
 
+    private void Awake()
+    {
+        Time.timeScale = 0;
+    }
     void Start()
     {
-        this.isOver = false;
-        Time.timeScale = 0;
+        scoreUI.gameObject.SetActive(false);
+        startUI.gameObject.SetActive(true);
     }
 
     public void PlayGame()
     {
-        Time.timeScale = 1;
+        playerName = nameField.text;
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void GameOver()
     {
-        this.isOver = true;
-
-        Time.timeScale = 0;
         scoreUI.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void BackToStartScreen()
+    {
+        scoreUI.gameObject.SetActive(false);
+        startUI.gameObject.SetActive(true);
     }
 }
