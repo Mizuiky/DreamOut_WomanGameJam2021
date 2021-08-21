@@ -17,12 +17,14 @@ public class GameUIController : MonoBehaviour
     [SerializeField] Color normalArrow;
 
     [HideInInspector]
-    public int choosedArrow;
+    public int sortedArrow = -1;
 
     private bool play = false;
 
     public void startGame()
     {
+        //Debug.Log("Start here");
+
         play = true;
         this.gameObject.SetActive(true);
         StartCoroutine(startSort());
@@ -41,9 +43,16 @@ public class GameUIController : MonoBehaviour
             Debug.Log("Sort Arrow");
             
             sortArrow();
-            arrows[choosedArrow].gameObject.GetComponent<Image>().color = arrowHighlight;
+
+            arrows[sortedArrow].gameObject.GetComponent<Image>().color = arrowHighlight;
+
+            //Debug.Log("Before the delay ");
+
             yield return new WaitForSeconds(1.5f);
-            arrows[choosedArrow].gameObject.GetComponent<Image>().color = normalArrow;
+
+            //Debug.Log("Done the delay ");
+
+            arrows[sortedArrow].gameObject.GetComponent<Image>().color = normalArrow;
         }     
     }
 
@@ -51,7 +60,8 @@ public class GameUIController : MonoBehaviour
     {
         int randowNumber = Random.Range(0, 3);
         setSortedArrow(randowNumber);
-        Debug.Log("sorted Arrow:" + this.choosedArrow);
+
+        //Debug.Log("sorted Arrow:" + this.choosedArrow);
     }
 
     private void setSortedArrow(int index)
@@ -59,13 +69,13 @@ public class GameUIController : MonoBehaviour
         switch(index)
         {
             case 0:
-                choosedArrow = (int)ArrowType.Up;
+                sortedArrow = (int)ArrowType.Up;
                 break;
             case 1:
-                choosedArrow = (int)ArrowType.Right;
+                sortedArrow = (int)ArrowType.Right;
                 break;
             case 2:
-                choosedArrow = (int)ArrowType.Left;
+                sortedArrow = (int)ArrowType.Left;
                 break;
         }
     }  
