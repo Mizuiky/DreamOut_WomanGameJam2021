@@ -6,24 +6,23 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public Transform gameUI;
+    public Transform startUI;
 
     [SerializeField] bool firstPlay;
     [SerializeField] bool isOver;
 
     void Start()
     {
-        this.firstPlay = true;
         this.isOver = false;
         Time.timeScale = 0;
     }
 
     public void PlayGame()
     {
-        firstPlay = false;
+        startUI.Find("StartUIScore").gameObject.SetActive(true);
 
         Time.timeScale = 1;
-        gameUI.gameObject.SetActive(false);
+        startUI.gameObject.SetActive(false);
     }
 
     public void GameOver()
@@ -31,6 +30,6 @@ public class GameController : MonoBehaviour
         this.isOver = true;
 
         Time.timeScale = 0;
-        gameUI.gameObject.SetActive(true);
+        startUI.gameObject.SetActive(true);
     }
 }
