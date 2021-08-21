@@ -14,10 +14,12 @@ public class GameController : MonoBehaviour
 
     //Player
     [SerializeField] Transform player;
+    private GameUIController gameUIController;
 
     private void Awake()
     {
         Time.timeScale = 0;
+        gameUIController = gameUI.GetComponent<GameUIController>();
     }
     void Start()
     {
@@ -28,15 +30,68 @@ public class GameController : MonoBehaviour
         player.gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if(Time.timeScale <= 0)
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Debug.Log("clicked in the UpArrow");
+            checkTheCurrentySortedArrow(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Debug.Log("clicked in the LeftArrow");
+            checkTheCurrentySortedArrow(1);
+        }
+        else if(Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Debug.Log("clicked in the RightArrow");
+            checkTheCurrentySortedArrow(2);
+        }          
+    }
+
+    private void checkTheCurrentySortedArrow(int index)
+    {
+        if (index == gameUIController.sortedArrow)
+        {
+            Debug.Log("Player right hit");
+            playRightHit();
+            addPlayerPoints();
+        }
+        else
+        {
+            Debug.Log("Player wrong hit");
+            playWrongHit();
+        }
+    }
+
+    private void addPlayerPoints()
+    {
+
+    }
+
+    private void playRightHit()
+    {
+
+    }
+
+    private void playWrongHit()
+    {
+
+    }
+
     public void PlayGame()
     {
-        
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
 
         player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
         player.GetComponent<PlayerController>().startGame();
-        gameUI.GetComponent<GameUIController>().startGame();
+        gameUIController.startGame();
         Time.timeScale = 1;
     }
 
@@ -46,7 +101,7 @@ public class GameController : MonoBehaviour
         startUI.gameObject.SetActive(false);
 
         player.GetComponent<PlayerController>().stopGame();
-        gameUI.GetComponent<GameUIController>().stopGame();
+        gameUIController.stopGame();
         Time.timeScale = 0;
     }
 
