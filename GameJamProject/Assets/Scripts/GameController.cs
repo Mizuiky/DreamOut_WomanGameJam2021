@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public Transform startUI;
     public Transform scoreUI;
+    public Transform gameUI;
 
     [SerializeField] InputField nameField;
     [SerializeField] string playerName;
@@ -27,6 +28,7 @@ public class GameController : MonoBehaviour
         playerName = nameField.text;
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
+        gameUI.GetComponent<GameUIController>().startGame();
         Time.timeScale = 1;
     }
 
