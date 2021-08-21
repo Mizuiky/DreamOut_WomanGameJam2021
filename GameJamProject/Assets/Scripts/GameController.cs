@@ -25,14 +25,17 @@ public class GameController : MonoBehaviour
         startUI.gameObject.SetActive(true);
         scoreUI.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(false);
+        player.gameObject.SetActive(false);
     }
 
     public void PlayGame()
     {
-        player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
+        
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
 
+        player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
+        player.GetComponent<PlayerController>().startGame();
         gameUI.GetComponent<GameUIController>().startGame();
         Time.timeScale = 1;
     }
@@ -42,6 +45,7 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(true);
         startUI.gameObject.SetActive(false);
 
+        player.GetComponent<PlayerController>().stopGame();
         gameUI.GetComponent<GameUIController>().stopGame();
         Time.timeScale = 0;
     }
