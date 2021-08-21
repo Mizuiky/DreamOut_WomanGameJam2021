@@ -19,15 +19,17 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
-        scoreUI.gameObject.SetActive(false);
         startUI.gameObject.SetActive(true);
+        scoreUI.gameObject.SetActive(false);
+        gameUI.gameObject.SetActive(false);
     }
 
     public void PlayGame()
     {
-        playerName = nameField.text;
+        this.playerName = this.nameField.text;
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
+
         gameUI.GetComponent<GameUIController>().startGame();
         Time.timeScale = 1;
     }
@@ -35,6 +37,9 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         scoreUI.gameObject.SetActive(true);
+        startUI.gameObject.SetActive(false);
+
+        gameUI.GetComponent<GameUIController>().stopGame();
         Time.timeScale = 0;
     }
 

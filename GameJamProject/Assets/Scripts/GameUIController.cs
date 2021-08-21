@@ -34,8 +34,14 @@ public class GameUIController : MonoBehaviour
     {
         Debug.Log("Start here");
         play = true;
-
+        this.gameObject.SetActive(true);
         StartCoroutine(startSort());
+    }
+
+    public void stopGame()
+    {
+        play = false;
+        this.gameObject.SetActive(false);
     }
 
     private IEnumerator startSort()
