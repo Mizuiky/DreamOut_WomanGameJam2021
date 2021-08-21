@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public Transform startUI;
+    public Transform scoreUI;
 
-    [SerializeField] bool firstPlay;
     [SerializeField] bool isOver;
 
     void Start()
@@ -19,10 +19,9 @@ public class GameController : MonoBehaviour
 
     public void PlayGame()
     {
-        startUI.Find("StartUIScore").gameObject.SetActive(true);
-
         Time.timeScale = 1;
         startUI.gameObject.SetActive(false);
+        scoreUI.gameObject.SetActive(false);
     }
 
     public void GameOver()
@@ -30,6 +29,6 @@ public class GameController : MonoBehaviour
         this.isOver = true;
 
         Time.timeScale = 0;
-        startUI.gameObject.SetActive(true);
+        scoreUI.gameObject.SetActive(true);
     }
 }
