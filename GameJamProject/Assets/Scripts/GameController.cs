@@ -14,11 +14,8 @@ public class GameController : MonoBehaviour
 
     //Player
     [SerializeField] Transform player;
-
     private GameUIController gameUIController;
-    private int inputIndex = -1;
 
-    private bool checkingButtonPressed = false;
     private void Awake()
     {
         Time.timeScale = 0;
@@ -30,6 +27,7 @@ public class GameController : MonoBehaviour
         startUI.gameObject.SetActive(true);
         scoreUI.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(false);
+        player.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -63,15 +61,11 @@ public class GameController : MonoBehaviour
             Debug.Log("Player right hit");
             playRightHit();
             addPlayerPoints();
-
-            checkingButtonPressed = false;
         }
         else
         {
             Debug.Log("Player wrong hit");
             playWrongHit();
-
-            checkingButtonPressed = false;
         }
     }
 
@@ -92,10 +86,11 @@ public class GameController : MonoBehaviour
 
     public void PlayGame()
     {
-        player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
 
+        player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
+        player.GetComponent<PlayerController>().startGame();
         gameUIController.startGame();
         Time.timeScale = 1;
     }
@@ -105,6 +100,7 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(true);
         startUI.gameObject.SetActive(false);
 
+        player.GetComponent<PlayerController>().stopGame();
         gameUIController.stopGame();
         Time.timeScale = 0;
     }
@@ -114,5 +110,4 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(false);
         startUI.gameObject.SetActive(true);
     }
-
 }
