@@ -271,6 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startUI: {fileID: 385112976}
   scoreUI: {fileID: 2002399671}
+  gameUI: {fileID: 0}
   nameField: {fileID: 1522850976}
   playerName: 
 --- !u!4 &403379669

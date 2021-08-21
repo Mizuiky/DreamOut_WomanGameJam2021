@@ -7,34 +7,40 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public Transform startUI;
+    public Transform scoreUI;
     public Transform gameUI;
 
-    [SerializeField] bool firstPlay;
-    [SerializeField] bool isOver;
+    [SerializeField] InputField nameField;
+    [SerializeField] string playerName;
 
+    private void Awake()
+    {
+        Time.timeScale = 0;
+    }
     void Start()
     {
-        this.firstPlay = true;
-        this.isOver = false;
-        Time.timeScale = 0;
+        scoreUI.gameObject.SetActive(false);
+        startUI.gameObject.SetActive(true);
     }
 
     public void PlayGame()
     {
-        firstPlay = false;
-
-
-        Time.timeScale = 1;
+        playerName = nameField.text;
         startUI.gameObject.SetActive(false);
-
+        scoreUI.gameObject.SetActive(false);
         gameUI.GetComponent<GameUIController>().startGame();
+        Time.timeScale = 1;
     }
 
     public void GameOver()
     {
-        this.isOver = true;
-
+        scoreUI.gameObject.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public void BackToStartScreen()
+    {
+        scoreUI.gameObject.SetActive(false);
         startUI.gameObject.SetActive(true);
     }
 }
