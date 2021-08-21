@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public Transform startUI;
-    public Transform scoreUI;
-    public Transform gameUI;
-
+    //Game UI
+    [SerializeField] Transform startUI;
+    [SerializeField] Transform scoreUI;
+    [SerializeField] Transform gameUI;
     [SerializeField] InputField nameField;
-    [SerializeField] string playerName;
+
+    //Player
+    [SerializeField] Transform player;
 
     private void Awake()
     {
@@ -19,6 +21,7 @@ public class GameController : MonoBehaviour
     }
     void Start()
     {
+        nameField.text = "Player";
         startUI.gameObject.SetActive(true);
         scoreUI.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(false);
@@ -26,7 +29,7 @@ public class GameController : MonoBehaviour
 
     public void PlayGame()
     {
-        this.playerName = this.nameField.text;
+        player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
 
