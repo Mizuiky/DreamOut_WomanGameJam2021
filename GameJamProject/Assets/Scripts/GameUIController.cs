@@ -5,14 +5,6 @@ using UnityEngine.UI;
 
 public class GameUIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] GameObject [] arrows;
-
-    [SerializeField] Color arrowHighlight;
-    [SerializeField] Color normalArrow;
-
-    private bool play = false;
-
     public enum ArrowType
     {
         Up = 0,
@@ -20,19 +12,19 @@ public class GameUIController : MonoBehaviour
         Right = 2
     }
 
+    [SerializeField] GameObject [] arrows;
+    [SerializeField] Color arrowHighlight;
+    [SerializeField] Color normalArrow;
+
     [HideInInspector]
     public int sortedArrow = -1;
 
-    void Update()
-    {
-      
-    }
-
-    // Update is called once per frame
+    private bool play = false;
 
     public void startGame()
     {
         //Debug.Log("Start here");
+
         play = true;
         this.gameObject.SetActive(true);
         StartCoroutine(startSort());
@@ -48,6 +40,8 @@ public class GameUIController : MonoBehaviour
     {   
         while(play)
         {
+            Debug.Log("Sort Arrow");
+            
             sortArrow();
 
             arrows[sortedArrow].gameObject.GetComponent<Image>().color = arrowHighlight;
@@ -65,10 +59,9 @@ public class GameUIController : MonoBehaviour
     public void sortArrow()
     {
         int randowNumber = Random.Range(0, 3);
-
         setSortedArrow(randowNumber);
 
-        //Debug.Log("sortedArrow " + this.sortedArrow);
+        //Debug.Log("sorted Arrow:" + this.choosedArrow);
     }
 
     private void setSortedArrow(int index)
