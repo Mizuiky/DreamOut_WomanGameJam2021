@@ -23,8 +23,11 @@ public class GameController : MonoBehaviour
     {
         firstPlay = false;
 
+
         Time.timeScale = 1;
         startUI.gameObject.SetActive(false);
+
+        gameUI.GetComponent<GameUIController>().startGame();
     }
 
     public void GameOver()
