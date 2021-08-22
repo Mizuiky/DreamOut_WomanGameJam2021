@@ -19,13 +19,14 @@ public class AudioController : MonoBehaviour
 
             sounds.source.volume = sounds.volume;
             sounds.source.pitch = sounds.pitch;
+            sounds.source.loop = sounds.loop;
         }
     }
 
     public void play (string name)
     {
         Sounds sound = Array.Find(gameSounds, Sounds => Sounds.name == name);
-        sound.source.Play();
+        sound.source.Play();   
     }
 
     public void stop(string name)
@@ -43,11 +44,21 @@ public class AudioController : MonoBehaviour
     private IEnumerator wakeUp()
     {
         //Debug.Log("stop dreambackground");
-        stop("DreamBackground");
-        yield return new WaitForSeconds(0.2f);
+        setSoundVolume("DreamBackground", 0.03f);
+
+        yield return new WaitForSeconds(0.05f);
         //Debug.Log("play gameover");
-        play("GameOver");
-        yield return new WaitForSeconds(0.02f);
         play("WakeUp");
+        yield return new WaitForSeconds(0.6f);
+        play("GameOver");
+    }
+
+    public void setSoundVolume(string name, float volume)
+    {
+        //Debug.Log("Entered in setsoundvalume");
+        Sounds sound = Array.Find(gameSounds, Sounds => Sounds.name == name);
+        //Debug.Log("source name " + sound.name);
+        sound.source.volume = volume;
+        //Debug.Log("volume: " + sound.source.volume.ToString());
     }
 }
