@@ -24,8 +24,8 @@ public class GameController : MonoBehaviour
     private AudioController audioController;
     private TimelineController timelineController;
     private PlayerController playerController;
-
     private ScoreController scoreController;
+
     private int playerScore;
 
     private void Awake()
@@ -90,7 +90,6 @@ public class GameController : MonoBehaviour
         {
             //Debug.Log("Player right hit");
             playRightHit();
-            addPlayerPoints();
             playerScore += 10;
         }
         else
@@ -98,11 +97,6 @@ public class GameController : MonoBehaviour
             //Debug.Log("Player wrong hit");
             playWrongHit();
         }
-    }
-
-    private void addPlayerPoints()
-    {
-       
     }
 
     private void playRightHit()
