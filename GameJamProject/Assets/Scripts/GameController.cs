@@ -109,9 +109,11 @@ public class GameController : MonoBehaviour
 
     private void playWrongHit()
     {
+        playerController.setAnimatorParameter("hadRightHit", false);
         gameUIController.setArrowColor(ArrowMode.ArrowState.WrongHit);
         timelineController.wrongHit();
         audioController.play("WrongHit");
+        changeBoatAnimation();
     }
 
     public void PlayGame()
@@ -170,5 +172,16 @@ public class GameController : MonoBehaviour
     {
         scoreUI.gameObject.SetActive(false);
         startUI.gameObject.SetActive(true);
+    }
+
+    public void changeBoatAnimation()
+    {
+        StartCoroutine(boatAnimation());
+    }
+
+    private IEnumerator boatAnimation()
+    {
+        yield return new WaitForSeconds(0.04f);
+        playerController.setAnimatorParameter("hadRightHit", true);
     }
 }
