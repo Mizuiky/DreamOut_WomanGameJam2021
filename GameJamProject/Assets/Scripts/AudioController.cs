@@ -22,9 +22,32 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    public void Play (string name)
+    public void play (string name)
     {
         Sounds sound = Array.Find(gameSounds, Sounds => Sounds.name == name);
         sound.source.Play();
+    }
+
+    public void stop(string name)
+    {
+        Sounds sound = Array.Find(gameSounds, Sounds => Sounds.name == name);
+        sound.source.Stop();
+    }
+
+    public void startToWake()
+    {
+        //Debug.Log("start wake");
+        StartCoroutine(wakeUp());
+    }
+
+    private IEnumerator wakeUp()
+    {
+        //Debug.Log("stop dreambackground");
+        stop("DreamBackground");
+        yield return new WaitForSeconds(0.2f);
+        //Debug.Log("play gameover");
+        play("GameOver");
+        yield return new WaitForSeconds(0.03f);
+        play("WakeUp");
     }
 }
