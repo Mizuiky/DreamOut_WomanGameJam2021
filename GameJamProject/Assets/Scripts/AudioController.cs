@@ -45,11 +45,9 @@ public class AudioController : MonoBehaviour
     {
         //Debug.Log("stop dreambackground");
         setSoundVolume("DreamBackground", 0.03f);
-
-        yield return new WaitForSeconds(0.05f);
         //Debug.Log("play gameover");
         play("WakeUp");
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.2f);
         play("GameOver");
     }
 
