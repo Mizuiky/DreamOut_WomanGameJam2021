@@ -47,13 +47,13 @@ public class GameUIController : MonoBehaviour
             
             sortArrow();
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
 
             setArrowColor(ArrowMode.ArrowState.Sorted);
 
             //Debug.Log("Before the delay ");
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.8f);
 
             //Debug.Log("Done the delay ");
 
