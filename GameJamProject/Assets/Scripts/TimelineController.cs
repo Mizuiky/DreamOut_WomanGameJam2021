@@ -10,6 +10,7 @@ public class TimelineController : MonoBehaviour
     //Timeline
     [SerializeField] Transform background;
     [SerializeField] Transform playerPoint;
+    [SerializeField] Transform audioComponent;
 
     //Positions
     [SerializeField] int nightmarePosition;
@@ -78,36 +79,51 @@ public class TimelineController : MonoBehaviour
 
     public void wrongHit()
     {
-        playerVelocity -= 5;
+        playerVelocity -= 3;
     }
 
     private void MonsterPosition(float position)
     {
         MonsterController mc = monster.GetComponent<MonsterController>();
         SpriteRenderer thunderSR = thunder.GetComponent<SpriteRenderer>();
+        AudioController audio = audioComponent.GetComponent<AudioController>();
+
         Color colorTh = thunderSR.color;
 
         if (position > 6)
         {
+            audio.play("Nightmare");
+            audio.setSoundVolume("Nightmare", 0.01f);
+
             mc.setMonsterPosition(0);
             thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0);
         }
         else if (position < 6 && position > 5) 
         {
+            audio.stop("Horse");
+            audio.play("Nightmare");
+            audio.setSoundVolume("DreamBackground", 0.04f);
+            audio.setSoundVolume("Nightmare", 0.3f);
+
             mc.setMonsterPosition(1);
-            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0.03f);
         }
 
         else if(position < 5 && position > 4)
         {
+            audio.play("Horse");
+            audio.setSoundVolume("Nightmare", 0.4f);
+
             mc.setMonsterPosition(2);
-            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0.2f);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0.06f);
         }
 
         else if(position < 4)
-        {
+        {           
+            audio.setSoundVolume("Nightmare", 0.6f);
+            
             mc.setMonsterPosition(3);
-            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0.4f);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 1f);
         }
     }
 
@@ -125,7 +141,7 @@ public class TimelineController : MonoBehaviour
     {
         while (play)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
             if (playerVelocity > 0)
             {
                 playerVelocity--;

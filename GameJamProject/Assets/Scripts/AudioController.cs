@@ -61,6 +61,7 @@ public class AudioController : MonoBehaviour
 
     private IEnumerator badAwakeUp()
     {
+        stop("Horse");
         //Debug.Log("stop dreambackground");
         setSoundVolume("Nightmare", 0.03f);
         //Debug.Log("play gameover");
