@@ -43,7 +43,7 @@ public class GameUIController : MonoBehaviour
     {   
         while(play)
         {
-            Debug.Log("Sort Arrow");
+            //Debug.Log("Sort Arrow");
             
             sortArrow();
 

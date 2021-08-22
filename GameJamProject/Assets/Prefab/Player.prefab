@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5663893989945544246}
   - component: {fileID: 5663893989945544241}
   m_Layer: 0
-  m_Name: boat_provisorio
+  m_Name: boat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
