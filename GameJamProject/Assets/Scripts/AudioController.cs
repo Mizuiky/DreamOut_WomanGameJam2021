@@ -47,7 +47,7 @@ public class AudioController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         //Debug.Log("play gameover");
         play("GameOver");
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.02f);
         play("WakeUp");
     }
 }
