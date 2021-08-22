@@ -9,7 +9,6 @@ public class MonsterController : MonoBehaviour
     Transform[] positions = new Transform[4];
     [SerializeField] int pos = 0;
 
-
     // Update is called once per frame
     void Update()
     {

@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour
         }
         if (timelineController.isVictory())
         {
-            this.GameOver();
+            this.Victory();
         }
 
         //Input Buttons
@@ -122,6 +122,9 @@ public class GameController : MonoBehaviour
     public void PlayGame()
     {
         playerScore = 0;
+        gameUIController.backNormalArrowState();
+
+        audioController.stop("Clock");
         audioController.play("ButtonClick");
         audioController.stop("Menu");
 
@@ -141,37 +144,12 @@ public class GameController : MonoBehaviour
 
     public void Victory()
     {
-        scoreController.setScoreScreen(playerScore);
-
-        scoreUI.gameObject.SetActive(true);
-        startUI.gameObject.SetActive(false);
-
-        playerController.stopGame();
-        monsterController.stopGame();
-        gameUIController.stopGame();
-        timelineController.stopGame();
-
-        pause = true;
+        endGameVictory();
     }
 
     public void GameOver()
     {
-        //Temp
-        scoreController.setScoreScreen(playerScore);
-
-        //Trocar pra tela de game over
-        scoreUI.gameObject.SetActive(true);
-        startUI.gameObject.SetActive(false);
-
-        playerController.stopGame();
-        monsterController.stopGame();
-        gameUIController.stopGame();
-        timelineController.stopGame();
-
-        audioController.startToWake();
-        gameUIController.backNormalArrowState();
-
-        pause = true;
+        endGame();       
     }
 
     public void BackToStartScreen()
@@ -185,9 +163,62 @@ public class GameController : MonoBehaviour
         StartCoroutine(boatAnimation());
     }
 
+    public void endGame()
+    {
+        StartCoroutine(gameOverDelay());
+    }
+
+    public void endGameVictory()
+    {
+        StartCoroutine(victoryDelay());
+    }
+
     private IEnumerator boatAnimation()
     {
         yield return new WaitForSeconds(0.04f);
         playerController.setAnimatorParameter("hadRightHit", true);
+    }
+
+    private IEnumerator gameOverDelay()
+    {
+        pause = true;
+
+        yield return new WaitForSeconds(0.9f);
+
+        gameUIController.backNormalArrowState();
+
+        gameUIController.stopGame();
+        timelineController.stopGame();
+
+        playerController.stopGame();
+        monsterController.stopGame();
+
+        audioController.startBadAwake();
+
+        //Temp
+        scoreController.setScoreScreen(playerScore);
+
+        //Trocar pra tela de game over
+        scoreUI.gameObject.SetActive(true);
+        startUI.gameObject.SetActive(false);
+    }
+
+    private IEnumerator victoryDelay()
+    {
+        pause = true;
+
+        yield return new WaitForSeconds(0.9f);
+
+        scoreController.setScoreScreen(playerScore);
+
+        audioController.startGoodAwake();
+
+        scoreUI.gameObject.SetActive(true);
+        startUI.gameObject.SetActive(false);
+
+        playerController.stopGame();
+        monsterController.stopGame();
+        gameUIController.stopGame();
+        timelineController.stopGame();
     }
 }
