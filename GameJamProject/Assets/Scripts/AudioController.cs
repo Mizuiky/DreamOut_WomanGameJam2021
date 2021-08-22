@@ -13,13 +13,15 @@ public class AudioController : MonoBehaviour
     private void Awake()
     {
         foreach (Sounds sounds in gameSounds)
-        {
+        {       
             sounds.source = gameObject.AddComponent<AudioSource>();
             sounds.source.clip = sounds.clip;
 
             sounds.source.volume = sounds.volume;
             sounds.source.pitch = sounds.pitch;
             sounds.source.loop = sounds.loop;
+
+            sounds.source.Stop();
         }
     }
 
@@ -35,19 +37,35 @@ public class AudioController : MonoBehaviour
         sound.source.Stop();
     }
 
-    public void startToWake()
+    public void startGoodAwake()
     {
         //Debug.Log("start wake");
-        StartCoroutine(wakeUp());
+        StartCoroutine(goodAwakeUp());
     }
 
-    private IEnumerator wakeUp()
+    private IEnumerator goodAwakeUp()
     {
         //Debug.Log("stop dreambackground");
         setSoundVolume("DreamBackground", 0.03f);
         //Debug.Log("play gameover");
+        play("Victory");     
+        yield return new WaitForSeconds(0.8f);
+        play("Clock");
+    }
+
+    public void startBadAwake()
+    {
+        //Debug.Log("start wake");
+        StartCoroutine(badAwakeUp());
+    }
+
+    private IEnumerator badAwakeUp()
+    {
+        //Debug.Log("stop dreambackground");
+        setSoundVolume("Nightmare", 0.03f);
+        //Debug.Log("play gameover");
         play("WakeUp");
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         play("GameOver");
     }
 

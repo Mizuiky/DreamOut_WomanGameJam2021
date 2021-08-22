@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator animator;
     float amplitude = 0.05f;
     float frequency = 1f;
 
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public void startGame()
     {
         this.gameObject.SetActive(true);
-        
+        this.animator.SetBool("hadRightHit", true);
     }
 
     public void stopGame()
@@ -27,6 +28,11 @@ public class PlayerController : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    public void setAnimatorParameter(string name, bool b)
+    {
+        animator.SetBool(name, b);
+    }
+    
     private void Update()
     {
         // Float up/down with a Sin()
