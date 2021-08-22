@@ -5,10 +5,8 @@ using UnityEngine;
 public class TimelineController : MonoBehaviour
 {
     //Timeline
-    [SerializeField] Transform line;
-    [SerializeField] Transform nightmarePoint;
+    [SerializeField] Transform background;
     [SerializeField] Transform playerPoint;
-    [SerializeField] Transform flagPoint;
 
     //Positions
     [SerializeField] int nightmarePosition;
@@ -17,52 +15,36 @@ public class TimelineController : MonoBehaviour
     [SerializeField] int playerVelocity;
 
     [SerializeField] bool play = false;
-    private float minDistance = 10;
+    private float minDistance = 30;
     private float maxDistance = 1000;
     private float distance;
 
-    void Start()
-    {
-        Debug.Log(nightmarePoint.transform.position.x);
-        Debug.Log(flagPoint.transform.transform.position.x);
-    }
-
     void Update()
     {
+        if (Time.timeScale <= 0)
+        {
+            return;
+        }
+
         distance = CalculateDistance();
         float playerPointPosition = (distance / 1000);
-        playerPoint.position = new Vector3((6 * playerPointPosition) - 3, playerPoint.position.y, 0);
 
-        if (distance <= minDistance)
-        {
-            Debug.Log("Defeat");
-            stopGame();
-        }
-        if (distance > maxDistance)
-        {
-            Debug.Log("Victory");
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            playerVelocity -= 3;
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            playerVelocity += 3;
-        }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            StartGame();
-        }
+        playerPoint.position = new Vector3((6 * playerPointPosition) -3, playerPoint.position.y, 0);
+        background.position = new Vector3(background.position.x, (10 * playerPointPosition) -5, background.position.z);
     }
 
-
-    public void StartGame()
+    public void startGame()
     {
         play = true;
+
+        distance = 500;
+        nightmarePosition = 0;
+        nightmareVelocity = 1;
+        playerPosition = 500;
+        playerVelocity = 20;
+
+        this.gameObject.SetActive(true);
+
         StartCoroutine(UpdateEnemyVelocity());
         StartCoroutine(UpdatePositions());
         StartCoroutine(ReducePlayerVelocity());
@@ -71,6 +53,27 @@ public class TimelineController : MonoBehaviour
     public void stopGame()
     {
         play = false;
+        this.gameObject.SetActive(false);
+    }
+
+    public bool isVictory()
+    {
+        return distance > maxDistance;
+    }
+
+    public bool isGameOver()
+    {
+        return distance <= minDistance;
+    }
+
+    public void rightHit()
+    {
+        playerVelocity += 3;
+    }
+
+    public void wrongHit()
+    {
+        playerVelocity -= 3;
     }
 
     IEnumerator UpdatePositions()

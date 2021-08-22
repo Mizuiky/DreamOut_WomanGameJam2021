@@ -10,23 +10,28 @@ public class GameController : MonoBehaviour
     [SerializeField] Transform startUI;
     [SerializeField] Transform scoreUI;
     [SerializeField] Transform gameUI;
+    [SerializeField] Transform timeline;
+
+    //Player
+    [SerializeField] Transform player;
 
     //Audio
     [SerializeField] Transform audio;
 
     [SerializeField] InputField nameField;
 
-    //Player
-    [SerializeField] Transform player;
     private GameUIController gameUIController;
     private AudioController audioController;
-
+    private TimelineController timelineController;
+    private PlayerController playerController;
 
     private void Awake()
     {
         Time.timeScale = 0;
         gameUIController = gameUI.GetComponent<GameUIController>();
         audioController = audio.GetComponent<AudioController>();
+        timelineController = timeline.GetComponent<TimelineController>();
+        playerController = player.GetComponent<PlayerController>();
     }
     void Start()
     {
@@ -35,6 +40,7 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
+        timeline.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -44,6 +50,17 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        //Win Conditions
+        if(timelineController.isGameOver())
+        {
+            this.GameOver();
+        }
+        if (timelineController.isVictory())
+        {
+            this.GameOver();
+        }
+
+        //Input Buttons
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Debug.Log("clicked in the UpArrow");
@@ -84,12 +101,14 @@ public class GameController : MonoBehaviour
     private void playRightHit()
     {
         gameUIController.setArrowColor(ArrowMode.ArrowState.RightHit);
+        timelineController.rightHit();
         audioController.Play("RightHit");
     }
 
     private void playWrongHit()
     {
         gameUIController.setArrowColor(ArrowMode.ArrowState.WrongHit);
+        timelineController.wrongHit();
         audioController.Play("WrongHit");
     }
 
@@ -98,9 +117,11 @@ public class GameController : MonoBehaviour
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
 
-        player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
-        player.GetComponent<PlayerController>().startGame();
+        playerController.setPlayerName(this.nameField.text);
+        playerController.startGame();
         gameUIController.startGame();
+        timelineController.startGame();
+
         Time.timeScale = 1;
     }
 
@@ -109,8 +130,10 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(true);
         startUI.gameObject.SetActive(false);
 
-        player.GetComponent<PlayerController>().stopGame();
+        playerController.stopGame();
         gameUIController.stopGame();
+        timelineController.stopGame();
+
         Time.timeScale = 0;
     }
 
