@@ -119,6 +119,8 @@ public class GameController : MonoBehaviour
     public void PlayGame()
     {
         playerScore = 0;
+        audioController.play("ButtonClick");
+
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
 
