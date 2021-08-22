@@ -17,13 +17,13 @@ public class GameController : MonoBehaviour
 
     //Audio
     [SerializeField] Transform audioComponent;
-
+    
     private GameUIController gameUIController;
     private AudioController audioController;
     private TimelineController timelineController;
     private PlayerController playerController;
-    private ScoreController scoreController;
 
+    private ScoreController scoreController;
     private int playerScore;
 
     private void Awake()
