@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public static bool pause = true;
+
     //Game UI
     [SerializeField] Transform startUI;
     [SerializeField] Transform scoreUI;
@@ -28,8 +30,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        Time.timeScale = 0;
-
+        pause = true; 
         gameUIController = gameUI.GetComponent<GameUIController>();
         audioController = audioComponent.GetComponent<AudioController>();
         timelineController = timeline.GetComponent<TimelineController>();
@@ -50,7 +51,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if(Time.timeScale <= 0)
+        if(pause)
         {
             return;
         }
@@ -68,17 +69,17 @@ public class GameController : MonoBehaviour
         //Input Buttons
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log("clicked in the UpArrow");
+            //Debug.Log("clicked in the UpArrow");
             checkTheCurrentySortedArrow(0);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Debug.Log("clicked in the LeftArrow");
+            //Debug.Log("clicked in the LeftArrow");
             checkTheCurrentySortedArrow(1);
         }
         else if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Debug.Log("clicked in the RightArrow");
+            //Debug.Log("clicked in the RightArrow");
             checkTheCurrentySortedArrow(2);
         }          
     }
@@ -87,14 +88,14 @@ public class GameController : MonoBehaviour
     {
         if (index == gameUIController.sortedArrow)
         {
-            Debug.Log("Player right hit");
+            //Debug.Log("Player right hit");
             playRightHit();
             addPlayerPoints();
             playerScore += 10;
         }
         else
         {
-            Debug.Log("Player wrong hit");
+            //Debug.Log("Player wrong hit");
             playWrongHit();
         }
     }
@@ -108,14 +109,14 @@ public class GameController : MonoBehaviour
     {
         gameUIController.setArrowColor(ArrowMode.ArrowState.RightHit);
         timelineController.rightHit();
-        audioController.Play("RightHit");
+        audioController.play("RightHit");
     }
 
     private void playWrongHit()
     {
         gameUIController.setArrowColor(ArrowMode.ArrowState.WrongHit);
         timelineController.wrongHit();
-        audioController.Play("WrongHit");
+        audioController.play("WrongHit");
     }
 
     public void PlayGame()
@@ -128,7 +129,9 @@ public class GameController : MonoBehaviour
         gameUIController.startGame();
         timelineController.startGame();
 
-        Time.timeScale = 1;
+        audioController.play("DreamBackground");
+
+        pause = false;
     }
 
     public void Victory()
@@ -158,7 +161,10 @@ public class GameController : MonoBehaviour
         gameUIController.stopGame();
         timelineController.stopGame();
 
-        Time.timeScale = 0;
+        audioController.startToWake();
+        gameUIController.backNormalArrowState();
+
+        pause = true;
     }
 
     public void BackToStartScreen()

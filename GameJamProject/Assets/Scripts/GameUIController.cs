@@ -47,6 +47,8 @@ public class GameUIController : MonoBehaviour
             
             sortArrow();
 
+            yield return new WaitForSeconds(0.5f);
+
             setArrowColor(ArrowMode.ArrowState.Sorted);
 
             //Debug.Log("Before the delay ");
@@ -99,6 +101,14 @@ public class GameUIController : MonoBehaviour
             case ArrowMode.ArrowState.WrongHit:
                 arrows[sortedArrow].gameObject.GetComponent<Image>().color = wrongArrowHighlight;
                 break;
+        }
+    }
+
+    public void backNormalArrowState()
+    {
+        foreach(GameObject arrow in arrows)
+        {
+            arrow.GetComponent<Image>().color = normalArrow;
         }
     }
 }
