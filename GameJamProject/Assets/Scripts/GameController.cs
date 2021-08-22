@@ -62,8 +62,9 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        gameUI.Find("Score").GetComponent<Text>().text = playerScore.ToString();
         //Win Conditions
-        if(timelineController.isGameOver())
+        if (timelineController.isGameOver())
         {
             this.GameOver();
         }

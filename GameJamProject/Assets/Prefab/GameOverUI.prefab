@@ -66,7 +66,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 28354181f48d04c4088ba64595df04f0, type: 3}
     m_FontSize: 47
     m_FontStyle: 0
     m_BestFit: 1
@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5365838013854904239, guid: e2c9c879096f6e442a7c289168af916a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b7ea7e3ebeb116e45bf5117e541eafcf, type: 3}
     - target: {fileID: 6811630317334933665, guid: e2c9c879096f6e442a7c289168af916a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -238,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8523106237112036308, guid: e2c9c879096f6e442a7c289168af916a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 8523106237112036308, guid: e2c9c879096f6e442a7c289168af916a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -306,6 +310,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 454562100439737762}
     m_Modifications:
+    - target: {fileID: 377420336099652503, guid: 5b470bbe91351d444908460c533ebfce, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6cc858eebfb52a74f86be5f8f5169120, type: 3}
+    - target: {fileID: 377420336099652503, guid: 5b470bbe91351d444908460c533ebfce, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 377420336099652503, guid: 5b470bbe91351d444908460c533ebfce, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 377420336099652503, guid: 5b470bbe91351d444908460c533ebfce, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2402213362352028188, guid: 5b470bbe91351d444908460c533ebfce, type: 3}
       propertyPath: m_Name
       value: QuitButton
@@ -340,7 +360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7889805390259651854, guid: 5b470bbe91351d444908460c533ebfce, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 255
       objectReference: {fileID: 0}
     - target: {fileID: 7889805390259651854, guid: 5b470bbe91351d444908460c533ebfce, type: 3}
       propertyPath: m_SizeDelta.y
