@@ -207,7 +207,7 @@ PrefabInstance:
     - target: {fileID: 5365838013854904239, guid: e2c9c879096f6e442a7c289168af916a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b7ea7e3ebeb116e45bf5117e541eafcf, type: 3}
+      objectReference: {fileID: 21300000, guid: 0c633b0c444769a49bb9e933e4af69dd, type: 3}
     - target: {fileID: 6811630317334933665, guid: e2c9c879096f6e442a7c289168af916a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -242,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8523106237112036308, guid: e2c9c879096f6e442a7c289168af916a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 255
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 8523106237112036308, guid: e2c9c879096f6e442a7c289168af916a, type: 3}
       propertyPath: m_SizeDelta.y
