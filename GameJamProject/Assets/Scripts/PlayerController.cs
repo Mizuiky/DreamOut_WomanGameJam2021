@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] string playerName;
-
     public void startGame()
     {
         this.gameObject.SetActive(true);
@@ -14,10 +12,5 @@ public class PlayerController : MonoBehaviour
     public void stopGame()
     {
         this.gameObject.SetActive(false);
-    }
-
-    public void setPlayerName(string name)
-    {
-        this.playerName = name;
     }
 }

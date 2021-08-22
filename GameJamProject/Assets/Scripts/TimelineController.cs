@@ -68,12 +68,12 @@ public class TimelineController : MonoBehaviour
 
     public void rightHit()
     {
-        playerVelocity += 3;
+        playerVelocity += 10;
     }
 
     public void wrongHit()
     {
-        playerVelocity -= 3;
+        playerVelocity -= 10;
     }
 
     IEnumerator UpdatePositions()

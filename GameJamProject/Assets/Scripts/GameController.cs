@@ -18,31 +18,35 @@ public class GameController : MonoBehaviour
     [SerializeField] Transform player;
 
     //Audio
-    [SerializeField] Transform audio;
-
-    [SerializeField] InputField nameField;
-
+    [SerializeField] Transform audioComponent;
+    
     private GameUIController gameUIController;
     private AudioController audioController;
     private TimelineController timelineController;
     private PlayerController playerController;
 
+    private ScoreController scoreController;
+    private int playerScore;
+
     private void Awake()
     {
-        pause = true;
+        pause = true; 
         gameUIController = gameUI.GetComponent<GameUIController>();
-        audioController = audio.GetComponent<AudioController>();
+        audioController = audioComponent.GetComponent<AudioController>();
         timelineController = timeline.GetComponent<TimelineController>();
         playerController = player.GetComponent<PlayerController>();
+        scoreController = scoreUI.GetComponent<ScoreController>();
     }
+
     void Start()
     {
-        nameField.text = "Player";
         startUI.gameObject.SetActive(true);
         scoreUI.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
         timeline.gameObject.SetActive(false);
+
+        playerScore = 0;
     }
 
     private void Update()
@@ -87,6 +91,7 @@ public class GameController : MonoBehaviour
             //Debug.Log("Player right hit");
             playRightHit();
             addPlayerPoints();
+            playerScore += 10;
         }
         else
         {
@@ -116,10 +121,10 @@ public class GameController : MonoBehaviour
 
     public void PlayGame()
     {
+        playerScore = 0;
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
 
-        playerController.setPlayerName(this.nameField.text);
         playerController.startGame();
         gameUIController.startGame();
         timelineController.startGame();
@@ -129,8 +134,26 @@ public class GameController : MonoBehaviour
         pause = false;
     }
 
+    public void Victory()
+    {
+        scoreController.setScoreScreen(playerScore);
+
+        scoreUI.gameObject.SetActive(true);
+        startUI.gameObject.SetActive(false);
+
+        playerController.stopGame();
+        gameUIController.stopGame();
+        timelineController.stopGame();
+
+        Time.timeScale = 0;
+    }
+
     public void GameOver()
     {
+        //Temp
+        scoreController.setScoreScreen(playerScore);
+
+        //Trocar pra tela de game over
         scoreUI.gameObject.SetActive(true);
         startUI.gameObject.SetActive(false);
 
