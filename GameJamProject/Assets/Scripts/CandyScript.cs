@@ -17,13 +17,12 @@ public class CandyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(this.gameObject, 20f);
+        Destroy(this.gameObject, 10f);
         posOffset = transform.position;
     }
 
     void Update()
     {
-
         // Float up/down with a Sin()
         tempPos = transform.position;
         tempPos.y = posOffset.y;

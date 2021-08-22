@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimelineController : MonoBehaviour
 {
     [SerializeField] Transform monster;
+    [SerializeField] Transform thunder;
 
     //Timeline
     [SerializeField] Transform background;
@@ -83,24 +84,30 @@ public class TimelineController : MonoBehaviour
     private void MonsterPosition(float position)
     {
         MonsterController mc = monster.GetComponent<MonsterController>();
+        SpriteRenderer thunderSR = thunder.GetComponent<SpriteRenderer>();
+        Color colorTh = thunderSR.color;
 
-        if(position > 6)
+        if (position > 6)
         {
             mc.setMonsterPosition(0);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0);
         }
         else if (position < 6 && position > 5) 
         {
             mc.setMonsterPosition(1);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0);
         }
 
         else if(position < 5 && position > 4)
         {
             mc.setMonsterPosition(2);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0.2f);
         }
 
         else if(position < 4)
         {
             mc.setMonsterPosition(3);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0.4f);
         }
     }
 

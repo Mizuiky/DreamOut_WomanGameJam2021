@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Transform scoreUI;
     [SerializeField] Transform gameUI;
     [SerializeField] Transform timeline;
+    [SerializeField] Transform gameOverUI;
 
     //Characters
     [SerializeField] Transform player;
@@ -49,6 +50,7 @@ public class GameController : MonoBehaviour
         gameUI.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
         timeline.gameObject.SetActive(false);
+        gameOverUI.gameObject.SetActive(false);
 
         playerScore = 0;
     }
@@ -67,7 +69,7 @@ public class GameController : MonoBehaviour
         }
         if (timelineController.isVictory())
         {
-            this.GameOver();
+            this.Victory();
         }
 
         //Input Buttons
@@ -125,6 +127,7 @@ public class GameController : MonoBehaviour
 
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
+        gameOverUI.gameObject.SetActive(false);
 
         playerController.startGame();
         monsterController.startGame();
@@ -143,6 +146,7 @@ public class GameController : MonoBehaviour
 
         scoreUI.gameObject.SetActive(true);
         startUI.gameObject.SetActive(false);
+        gameOverUI.gameObject.SetActive(false);
 
         playerController.stopGame();
         monsterController.stopGame();
@@ -158,8 +162,9 @@ public class GameController : MonoBehaviour
         scoreController.setScoreScreen(playerScore);
 
         //Trocar pra tela de game over
-        scoreUI.gameObject.SetActive(true);
+        scoreUI.gameObject.SetActive(false);
         startUI.gameObject.SetActive(false);
+        gameOverUI.gameObject.SetActive(true);
 
         playerController.stopGame();
         monsterController.stopGame();
