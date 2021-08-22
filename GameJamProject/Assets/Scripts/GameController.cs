@@ -205,6 +205,7 @@ public class GameController : MonoBehaviour
         //Trocar pra tela de game over
         scoreUI.gameObject.SetActive(false);
         startUI.gameObject.SetActive(false);
+        gameOverUI.gameObject.SetActive(true);
     }
 
     private IEnumerator victoryDelay()
@@ -219,7 +220,7 @@ public class GameController : MonoBehaviour
 
         scoreUI.gameObject.SetActive(true);
         startUI.gameObject.SetActive(false);
-        gameOverUI.gameObject.SetActive(true);
+        gameOverUI.gameObject.SetActive(false);
 
         playerController.stopGame();
         monsterController.stopGame();
