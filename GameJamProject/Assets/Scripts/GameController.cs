@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        audioController.play("Menu");
         startUI.gameObject.SetActive(true);
         scoreUI.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(false);
@@ -120,6 +121,7 @@ public class GameController : MonoBehaviour
     {
         playerScore = 0;
         audioController.play("ButtonClick");
+        audioController.stop("Menu");
 
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
@@ -129,6 +131,7 @@ public class GameController : MonoBehaviour
         gameUIController.startGame();
         timelineController.startGame();
 
+        audioController.setSoundVolume("DreamBackground", 0.1f);
         audioController.play("DreamBackground");
 
         pause = false;
