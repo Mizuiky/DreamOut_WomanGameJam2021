@@ -18,9 +18,9 @@ public class GameController : MonoBehaviour
 
     //Player
     [SerializeField] Transform player;
-
     private GameUIController gameUIController;
     private AudioController audioController;
+
 
     private void Awake()
     {
@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
         startUI.gameObject.SetActive(true);
         scoreUI.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(false);
+        player.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -94,10 +95,11 @@ public class GameController : MonoBehaviour
 
     public void PlayGame()
     {
-        player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
         startUI.gameObject.SetActive(false);
         scoreUI.gameObject.SetActive(false);
 
+        player.GetComponent<PlayerController>().setPlayerName(this.nameField.text);
+        player.GetComponent<PlayerController>().startGame();
         gameUIController.startGame();
         Time.timeScale = 1;
     }
@@ -107,6 +109,7 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(true);
         startUI.gameObject.SetActive(false);
 
+        player.GetComponent<PlayerController>().stopGame();
         gameUIController.stopGame();
         Time.timeScale = 0;
     }
@@ -116,5 +119,4 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(false);
         startUI.gameObject.SetActive(true);
     }
-
 }
