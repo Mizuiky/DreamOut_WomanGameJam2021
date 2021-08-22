@@ -15,8 +15,8 @@ public class SpawnScript : MonoBehaviour
 
     void SortCandy()
     {
-        int p = Random.Range(0, 3);
-        int c = Random.Range(0, 5);
+        int p = Random.Range(0, 4);
+        int c = Random.Range(0, 6);
 
         Transform t = candys[c];
         t.position = positions[p].position;

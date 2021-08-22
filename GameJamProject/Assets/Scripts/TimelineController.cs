@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimelineController : MonoBehaviour
 {
     [SerializeField] Transform monster;
+    [SerializeField] Transform thunder;
 
     //Timeline
     [SerializeField] Transform background;
@@ -45,7 +46,7 @@ public class TimelineController : MonoBehaviour
         nightmarePosition = 0;
         nightmareVelocity = 1;
         playerPosition = 500;
-        playerVelocity = 20;
+        playerVelocity = 10;
 
         this.gameObject.SetActive(true);
 
@@ -72,35 +73,41 @@ public class TimelineController : MonoBehaviour
 
     public void rightHit()
     {
-        playerVelocity += 10;
+        playerVelocity += 5;
     }
 
     public void wrongHit()
     {
-        playerVelocity -= 10;
+        playerVelocity -= 5;
     }
 
     private void MonsterPosition(float position)
     {
         MonsterController mc = monster.GetComponent<MonsterController>();
+        SpriteRenderer thunderSR = thunder.GetComponent<SpriteRenderer>();
+        Color colorTh = thunderSR.color;
 
-        if(position > 6)
+        if (position > 6)
         {
             mc.setMonsterPosition(0);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0);
         }
         else if (position < 6 && position > 5) 
         {
             mc.setMonsterPosition(1);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0);
         }
 
         else if(position < 5 && position > 4)
         {
             mc.setMonsterPosition(2);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0.2f);
         }
 
         else if(position < 4)
         {
             mc.setMonsterPosition(3);
+            thunderSR.color = new Color(colorTh.r, colorTh.g, colorTh.b, 0.4f);
         }
     }
 
@@ -118,7 +125,7 @@ public class TimelineController : MonoBehaviour
     {
         while (play)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.3f);
             if (playerVelocity > 0)
             {
                 playerVelocity--;
