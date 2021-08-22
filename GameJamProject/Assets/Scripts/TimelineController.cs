@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TimelineController : MonoBehaviour
 {
+    [SerializeField] Transform monster;
+
     //Timeline
     [SerializeField] Transform background;
     [SerializeField] Transform playerPoint;
@@ -31,6 +33,8 @@ public class TimelineController : MonoBehaviour
 
         playerPoint.position = new Vector3((6 * playerPointPosition) -3, playerPoint.position.y, 0);
         background.position = new Vector3(background.position.x, (10 * playerPointPosition) -5, background.position.z);
+
+        MonsterPosition(playerPointPosition*10);
     }
 
     public void startGame()
@@ -74,6 +78,30 @@ public class TimelineController : MonoBehaviour
     public void wrongHit()
     {
         playerVelocity -= 10;
+    }
+
+    private void MonsterPosition(float position)
+    {
+        MonsterController mc = monster.GetComponent<MonsterController>();
+
+        if(position > 6)
+        {
+            mc.setMonsterPosition(0);
+        }
+        else if (position < 6 && position > 5) 
+        {
+            mc.setMonsterPosition(1);
+        }
+
+        else if(position < 5 && position > 4)
+        {
+            mc.setMonsterPosition(2);
+        }
+
+        else if(position < 4)
+        {
+            mc.setMonsterPosition(3);
+        }
     }
 
     IEnumerator UpdatePositions()

@@ -14,8 +14,9 @@ public class GameController : MonoBehaviour
     [SerializeField] Transform gameUI;
     [SerializeField] Transform timeline;
 
-    //Player
+    //Characters
     [SerializeField] Transform player;
+    [SerializeField] Transform monster;
 
     //Audio
     [SerializeField] Transform audioComponent;
@@ -25,6 +26,7 @@ public class GameController : MonoBehaviour
     private TimelineController timelineController;
     private PlayerController playerController;
     private ScoreController scoreController;
+    private MonsterController monsterController;
 
     private int playerScore;
 
@@ -36,6 +38,7 @@ public class GameController : MonoBehaviour
         timelineController = timeline.GetComponent<TimelineController>();
         playerController = player.GetComponent<PlayerController>();
         scoreController = scoreUI.GetComponent<ScoreController>();
+        monsterController = monster.GetComponent<MonsterController>();
     }
 
     void Start()
@@ -126,6 +129,7 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(false);
 
         playerController.startGame();
+        monsterController.startGame();
         gameUIController.startGame();
         timelineController.startGame();
 
@@ -143,10 +147,11 @@ public class GameController : MonoBehaviour
         startUI.gameObject.SetActive(false);
 
         playerController.stopGame();
+        monsterController.stopGame();
         gameUIController.stopGame();
         timelineController.stopGame();
 
-        Time.timeScale = 0;
+        pause = true;
     }
 
     public void GameOver()
@@ -159,6 +164,7 @@ public class GameController : MonoBehaviour
         startUI.gameObject.SetActive(false);
 
         playerController.stopGame();
+        monsterController.stopGame();
         gameUIController.stopGame();
         timelineController.stopGame();
 

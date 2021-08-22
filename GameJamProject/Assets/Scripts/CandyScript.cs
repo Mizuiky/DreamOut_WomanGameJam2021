@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveController : MonoBehaviour
+public class CandyScript : MonoBehaviour
 {
-    MeshRenderer mr;
     [SerializeField] float speed;
 
     // User Inputs
@@ -18,17 +17,18 @@ public class WaveController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mr = GetComponent<MeshRenderer>();
+        Destroy(this.gameObject, 20f);
         posOffset = transform.position;
     }
 
     void Update()
     {
-        mr.material.mainTextureOffset += Vector2.right * speed * Time.deltaTime;
 
         // Float up/down with a Sin()
-        tempPos = posOffset;
+        tempPos = transform.position;
+        tempPos.y = posOffset.y;
         tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
+        tempPos.x -= speed * Time.deltaTime;
 
         transform.position = tempPos;
     }
