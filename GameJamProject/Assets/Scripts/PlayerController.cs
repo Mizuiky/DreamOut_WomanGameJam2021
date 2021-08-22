@@ -11,10 +11,15 @@ public class PlayerController : MonoBehaviour
     Vector3 posOffset = new Vector3();
     Vector3 tempPos = new Vector3();
 
+    private void Start()
+    {
+        posOffset = transform.position;
+    }
+
     public void startGame()
     {
         this.gameObject.SetActive(true);
-        posOffset = transform.position;
+        
     }
 
     public void stopGame()
