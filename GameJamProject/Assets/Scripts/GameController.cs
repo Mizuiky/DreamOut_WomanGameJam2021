@@ -182,4 +182,9 @@ public class GameController : MonoBehaviour
         scoreUI.gameObject.SetActive(false);
         startUI.gameObject.SetActive(true);
     }
+
+    public void doExitGame()
+    {
+        Application.Quit();
+    }
 }

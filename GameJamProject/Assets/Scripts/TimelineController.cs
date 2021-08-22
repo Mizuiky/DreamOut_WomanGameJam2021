@@ -46,7 +46,7 @@ public class TimelineController : MonoBehaviour
         nightmarePosition = 0;
         nightmareVelocity = 1;
         playerPosition = 500;
-        playerVelocity = 20;
+        playerVelocity = 10;
 
         this.gameObject.SetActive(true);
 
@@ -73,12 +73,12 @@ public class TimelineController : MonoBehaviour
 
     public void rightHit()
     {
-        playerVelocity += 10;
+        playerVelocity += 5;
     }
 
     public void wrongHit()
     {
-        playerVelocity -= 10;
+        playerVelocity -= 5;
     }
 
     private void MonsterPosition(float position)
@@ -125,7 +125,7 @@ public class TimelineController : MonoBehaviour
     {
         while (play)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.3f);
             if (playerVelocity > 0)
             {
                 playerVelocity--;
